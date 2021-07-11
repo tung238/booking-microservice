@@ -1,0 +1,96 @@
+syntax = "proto3";
+// import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto"; 
+option go_package ="/;product-catalog"; 
+
+service ProductCatalogService {
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse) {};
+   rpc GetProduct(GetProductRequest) returns (Product) {};
+   rpc CreateProduct(CreateProductRequest) returns (Product){};
+   rpc UpdateProduct(UpdateProductRequest) returns (Product){};
+   rpc DeleteProduct(DeleteProductRequest) returns (google.protobuf.Empty) ;
+}
+
+enum ProductType{
+    TYPE_SERVICE = 0;
+    TYPE_PRODUCT = 1;
+}
+
+message ListProductsRequest{
+    int32 page_size = 1;
+    int32 page_token =2;
+    string filter = 3;
+    string order_by = 4;
+}
+
+message ListProductsResponse {
+    int32 total_size = 1;
+    int32 next_page_token = 2;
+    repeated Product items = 3;
+
+}
+message GetProductRequest{
+    int32 id = 1;
+
+}
+
+message CreateProductRequest{
+
+}
+
+message UpdateProductRequest{
+
+}
+
+message DeleteProductRequest{
+    int32 id = 1;
+}
+
+message Category{
+    int32 id = 1;
+    string name = 2;
+    string code = 3;
+}
+
+message Collection{
+    int32 id = 1;
+    string name = 2;
+}
+
+message ProductProperty{
+    string name = 1;
+    string value = 2;
+}
+
+message ProductVariation{
+    int32 id = 1;
+    int32 product_id = 2;
+    Product product = 3;
+    string color = 4;
+    string size = 5;
+    string SKU = 6;
+    float price = 7;
+    int32 available_quantity = 8;
+    string images = 9;
+
+
+}
+
+message Product{
+    int32 id = 1;
+    string name = 2;
+    string name_with_slug = 3;
+    bool feature = 4;
+    string code=5;
+    int32 category_id = 6;
+    Category category = 7;
+    repeated Collection collections = 8;
+    string madeCountry = 9;
+    string gender = 10;
+    string main_image = 11;
+    float price = 12;
+    string description = 13;
+    repeated ProductProperty product_properties = 14;
+    repeated ProductVariation product_variations = 15;
+    ProductType type = 16;
+}

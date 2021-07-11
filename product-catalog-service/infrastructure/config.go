@@ -1,4 +1,4 @@
-package config
+package infrastructure
 
 import (
 	"os"
@@ -61,7 +61,7 @@ var (
 )
 
 func init() {
-	if err := configor.Load(&Config, "config/database.yml", "config/smtp.yml", "config/application.yml"); err != nil {
+	if err := configor.Load(&Config, "infrastructure/config/database.yml", "infrastructure/config/smtp.yml", "infrastructure/config/application.yml"); err != nil {
 		panic(err)
 	}
 

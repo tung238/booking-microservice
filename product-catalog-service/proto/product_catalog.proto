@@ -1,49 +1,52 @@
 syntax = "proto3";
 // import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto"; 
-option go_package ="/;product-catalog"; 
+option go_package ="/;proto"; 
 
 service ProductCatalogService {
   rpc ListProducts(ListProductsRequest) returns (ListProductsResponse) {};
    rpc GetProduct(GetProductRequest) returns (Product) {};
    rpc CreateProduct(CreateProductRequest) returns (Product){};
    rpc UpdateProduct(UpdateProductRequest) returns (Product){};
-   rpc DeleteProduct(DeleteProductRequest) returns (google.protobuf.Empty) ;
+   rpc DeleteProduct(DeleteProductRequest) returns (google.protobuf.Empty);
 }
 
 enum ProductType{
-    TYPE_SERVICE = 0;
-    TYPE_PRODUCT = 1;
+    SERVICE = 0;
+    PRODUCT = 1;
 }
 
 message ListProductsRequest{
-    int32 page_size = 1;
-    int32 page_token =2;
-    string filter = 3;
-    string order_by = 4;
+    int32 version = 1;
+    int32 page_size = 2;
+    int32 page_token = 3;
+    string filter = 4;
+    string order_by = 5;
 }
 
 message ListProductsResponse {
     int32 total_size = 1;
     int32 next_page_token = 2;
     repeated Product items = 3;
-
 }
 message GetProductRequest{
-    int32 id = 1;
-
+    int32 version = 1;
+    int32 id = 2;
 }
 
 message CreateProductRequest{
-
+    int32 version = 1;
+    Product product = 2;
 }
 
 message UpdateProductRequest{
-
+    int32 version = 1;
+    Product product = 2;
 }
 
 message DeleteProductRequest{
-    int32 id = 1;
+    int32 version = 1;
+    int32 id = 2;
 }
 
 message Category{

@@ -1,7 +1,6 @@
 syntax = "proto3";
-import "google/protobuf/wrappers.proto";
 
-option go_package ="/;payment"; 
+option go_package ="/;proto"; 
 
 service OrderService {
 //   rpc CreatePayment(CreatePaymentRequest) returns (Payment) {}

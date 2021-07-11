@@ -1,0 +1,5 @@
+db:
+  adapter: postgres
+  name: qor_example
+  user: postgres
+  password: postgres
